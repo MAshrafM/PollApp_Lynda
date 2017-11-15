@@ -5,6 +5,7 @@
   "main": "app-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "webpack",
     "start": "node app-server"
   },
   "author": "MAshraf",
