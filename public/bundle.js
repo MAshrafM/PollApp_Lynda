@@ -21558,22 +21558,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = exports.App = function (_React$Component) {
   _inherits(App, _React$Component);
 
-  function App() {
+  function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = {
+      status: 'disconnected'
+    };
+    return _this;
   }
 
   _createClass(App, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
+      var _this2 = this;
+
       this.socket = (0, _socket2.default)('http://localhost:3000');
-      this.socket.on('connect', this.connect);
-    }
-  }, {
-    key: 'connect',
-    value: function connect() {
-      console.log('Connected: ' + this.socket.id);
+      this.socket.on('connect', function () {
+        _this2.setState({ status: 'connected' });
+      });
+      this.socket.on('disconnect', function () {
+        _this2.setState({ status: 'disconnected' });
+      });
     }
   }, {
     key: 'render',
@@ -21581,7 +21588,7 @@ var App = exports.App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Header2.default, { title: 'New Header' })
+        _react2.default.createElement(_Header2.default, { title: 'New Header', status: this.state.status })
       );
     }
   }]);
@@ -24757,10 +24764,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Header = exports.Header = function (_React$Component) {
   _inherits(Header, _React$Component);
 
-  function Header() {
+  function Header(props) {
     _classCallCheck(this, Header);
 
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
   }
 
   _createClass(Header, [{
@@ -24768,11 +24775,20 @@ var Header = exports.Header = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'header',
-        null,
+        { className: 'row' },
         _react2.default.createElement(
-          'h1',
-          null,
-          this.props.title
+          'div',
+          { className: 'col-xs-10' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            this.props.title
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col-xs-2' },
+          _react2.default.createElement('span', { id: 'connection-status', className: this.props.status })
         )
       );
     }
