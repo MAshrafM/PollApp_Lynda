@@ -23,9 +23,9 @@ export class App extends React.Component {
   
   render(){
     return (
-      <div>
+      <nav>
         <Header title="New Header" status={this.state.status} />
-      </div>
+      </nav>
     )
   }
 }
