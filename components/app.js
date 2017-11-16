@@ -1,5 +1,6 @@
 import React from 'react'
 import io from 'socket.io-client'
+import Header from './parts/Header'
 
 export class App extends React.Component {
   componentWillMount () {
@@ -13,9 +14,9 @@ export class App extends React.Component {
   
   render(){
     return (
-      <h1>
-        Hello World From React
-      </h1>
+      <div>
+        <Header title="New Header" />
+      </div>
     )
   }
 }
