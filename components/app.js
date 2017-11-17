@@ -6,7 +6,8 @@ export class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      status: 'disconnected'
+      status: 'disconnected',
+      title: ''
     }
   }
   
@@ -19,12 +20,15 @@ export class App extends React.Component {
     () => {
       this.setState({ status: 'disconnected' })
     })
+    this.socket.on('welcome', serverState => {
+      this.setState({ title: serverState.title })
+    })
   }
   
   render(){
     return (
       <nav>
-        <Header title="New Header" status={this.state.status} />
+        <Header title={this.state.title} status={this.state.status} />
       </nav>
     )
   }

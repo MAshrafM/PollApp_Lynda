@@ -21564,7 +21564,8 @@ var App = exports.App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      status: 'disconnected'
+      status: 'disconnected',
+      title: ''
     };
     return _this;
   }
@@ -21581,14 +21582,17 @@ var App = exports.App = function (_React$Component) {
       this.socket.on('disconnect', function () {
         _this2.setState({ status: 'disconnected' });
       });
+      this.socket.on('welcome', function (serverState) {
+        _this2.setState({ title: serverState.title });
+      });
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        'nav',
         null,
-        _react2.default.createElement(_Header2.default, { title: 'New Header', status: this.state.status })
+        _react2.default.createElement(_Header2.default, { title: this.state.title, status: this.state.status })
       );
     }
   }]);
