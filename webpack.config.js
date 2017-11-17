@@ -1,7 +1,8 @@
 module.exports = {
   entry: "./app-client.js",
   output: {
-    filename: "public/bundle.js"
+    filename: "public/bundle.js",
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -14,5 +15,8 @@ module.exports = {
         }
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true,
   }
 }

@@ -1,6 +1,9 @@
 import React from 'react'
+import Router from 'react-router'
 import io from 'socket.io-client'
 import Header from './parts/Header'
+import { HashRouter } from 'react-router-dom'
+import Routes from '../routes/Routes'
 
 export class App extends React.Component {
   constructor (props) {
@@ -27,9 +30,12 @@ export class App extends React.Component {
   
   render(){
     return (
-      <nav>
-        <Header title={this.state.title} status={this.state.status} />
-      </nav>
+      <HashRouter>
+        <div>
+          <Header title={this.state.title} status={this.state.status} />
+          <Routes />
+        </div>
+      </HashRouter>
     )
   }
 }
