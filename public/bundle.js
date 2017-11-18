@@ -23615,7 +23615,7 @@ var App = exports.App = function (_React$Component) {
           'div',
           null,
           _react2.default.createElement(_Header2.default, { title: this.state.title, status: this.state.status }),
-          _react2.default.createElement(_Routes2.default, null)
+          _react2.default.createElement(_Routes2.default, this.state)
         )
       );
     }
@@ -29943,6 +29943,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -29963,21 +29965,52 @@ var _Board2 = _interopRequireDefault(_Board);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Routes = function Routes() {
-  return _react2.default.createElement(
-    'main',
-    null,
-    _react2.default.createElement(
-      _reactRouterDom.Switch,
-      null,
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Audience2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/speaker', component: _Speaker2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/board', component: _Board2.default })
-    )
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 //Routes
+
+
+var Routes = function (_React$Component) {
+  _inherits(Routes, _React$Component);
+
+  function Routes(props) {
+    _classCallCheck(this, Routes);
+
+    return _possibleConstructorReturn(this, (Routes.__proto__ || Object.getPrototypeOf(Routes)).call(this, props));
+  }
+
+  _createClass(Routes, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'main',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Switch,
+          null,
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: function component() {
+              return _react2.default.createElement(_Audience2.default, _this2.props);
+            } }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/speaker', component: function component() {
+              return _react2.default.createElement(_Speaker2.default, _this2.props);
+            } }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/board', component: function component() {
+              return _react2.default.createElement(_Board2.default, _this2.props);
+            } })
+        )
+      );
+    }
+  }]);
+
+  return Routes;
+}(_react2.default.Component);
+
 exports.default = Routes;
 
 /***/ }),
@@ -30012,7 +30045,10 @@ var Audience = exports.Audience = function (_React$Component) {
   function Audience(props) {
     _classCallCheck(this, Audience);
 
-    return _possibleConstructorReturn(this, (Audience.__proto__ || Object.getPrototypeOf(Audience)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Audience.__proto__ || Object.getPrototypeOf(Audience)).call(this, props));
+
+    console.log(props);
+    return _this;
   }
 
   _createClass(Audience, [{
@@ -30021,7 +30057,8 @@ var Audience = exports.Audience = function (_React$Component) {
       return _react2.default.createElement(
         'h1',
         null,
-        'Audience'
+        'Audience | ',
+        this.props.title
       );
     }
   }]);
@@ -30072,7 +30109,8 @@ var Speaker = exports.Speaker = function (_React$Component) {
       return _react2.default.createElement(
         'h1',
         null,
-        'Speaker'
+        'Speaker | ',
+        this.props.status
       );
     }
   }]);
@@ -30123,7 +30161,8 @@ var Board = exports.Board = function (_React$Component) {
       return _react2.default.createElement(
         'h1',
         null,
-        'Board'
+        'Board | ',
+        this.props.title
       );
     }
   }]);

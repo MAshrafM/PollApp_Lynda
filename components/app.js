@@ -33,7 +33,7 @@ export class App extends React.Component {
       <HashRouter>
         <div>
           <Header title={this.state.title} status={this.state.status} />
-          <Routes />
+          <Routes {...this.state} />
         </div>
       </HashRouter>
     )
