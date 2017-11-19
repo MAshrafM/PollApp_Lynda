@@ -1,5 +1,6 @@
 import React from 'react'
 import Display from './parts/Display'
+import Join from './parts/Join'
 
 export class Audience extends React.Component {
   constructor (props) {
@@ -11,6 +12,8 @@ export class Audience extends React.Component {
       <div>
         <Display if={this.props.status === 'connected'}>
           <h1>Join The Session</h1>
+          <hr />
+          <Join />
         </Display>
       </div>
     )
