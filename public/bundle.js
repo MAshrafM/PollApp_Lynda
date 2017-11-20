@@ -23586,7 +23586,8 @@ var App = exports.App = function (_React$Component) {
 
     _this.state = {
       status: 'disconnected',
-      title: ''
+      title: '',
+      member: {}
     };
     _this.emit = _this.emit.bind(_this);
     return _this;
@@ -23606,6 +23607,9 @@ var App = exports.App = function (_React$Component) {
       });
       this.socket.on('welcome', function (serverState) {
         _this2.setState({ title: serverState.title });
+      });
+      this.socket.on('joined', function (member) {
+        _this2.setState({ member: member });
       });
     }
   }, {
@@ -30077,12 +30081,31 @@ var Audience = exports.Audience = function (_React$Component) {
           _Display2.default,
           { 'if': this.props.status === 'connected' },
           _react2.default.createElement(
-            'h1',
-            null,
-            'Join The Session'
+            _Display2.default,
+            { 'if': this.props.member.name },
+            _react2.default.createElement(
+              'h2',
+              null,
+              'Welcome ',
+              this.props.member.name
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Questions will appear here.'
+            )
           ),
-          _react2.default.createElement('hr', null),
-          _react2.default.createElement(_Join2.default, { emit: this.props.emit })
+          _react2.default.createElement(
+            _Display2.default,
+            { 'if': !this.props.member.name },
+            _react2.default.createElement(
+              'h1',
+              null,
+              'Join The Session'
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(_Join2.default, { emit: this.props.emit })
+          )
         )
       );
     }

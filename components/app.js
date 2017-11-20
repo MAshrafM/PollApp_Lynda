@@ -10,7 +10,8 @@ export class App extends React.Component {
     super(props)
     this.state = {
       status: 'disconnected',
-      title: ''
+      title: '',
+      member: {}
     }
     this.emit = this.emit.bind(this)
   }
@@ -26,6 +27,9 @@ export class App extends React.Component {
     })
     this.socket.on('welcome', serverState => {
       this.setState({ title: serverState.title })
+    })
+    this.socket.on('joined', member => {
+      this.setState({ member: member })
     })
   }
   
