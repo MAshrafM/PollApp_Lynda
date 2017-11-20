@@ -22,6 +22,10 @@ io.sockets.on('connection', socket => {
   socket.emit('welcome', {
     title: title
   })
+  // join event
+  socket.on('join', payload => {
+    console.log('Audience Joined: %s', payload.name)
+  })
   // number of sockets connection
   connections.push(socket)
   console.log("Connected: %s sockets connected", connections.length)

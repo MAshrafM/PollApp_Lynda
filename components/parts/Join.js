@@ -8,8 +8,8 @@ class Join extends React.Component {
   }
   
   join () {
-    let memberName = this.input.value;
-    console.log(memberName)
+    let memberName = this.input.value
+    this.props.emit('join', { name: memberName })
   }
   
   render () {

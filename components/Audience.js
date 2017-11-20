@@ -13,7 +13,7 @@ export class Audience extends React.Component {
         <Display if={this.props.status === 'connected'}>
           <h1>Join The Session</h1>
           <hr />
-          <Join />
+          <Join emit={this.props.emit} />
         </Display>
       </div>
     )

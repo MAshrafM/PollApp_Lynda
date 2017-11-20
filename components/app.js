@@ -12,6 +12,7 @@ export class App extends React.Component {
       status: 'disconnected',
       title: ''
     }
+    this.emit = this.emit.bind(this)
   }
   
   componentWillMount () {
@@ -28,12 +29,16 @@ export class App extends React.Component {
     })
   }
   
+  emit (eventName, payload) {
+    this.socket.emit(eventName, payload)
+  }
+  
   render(){
     return (
       <HashRouter>
         <div>
           <Header title={this.state.title} status={this.state.status} />
-          <Routes {...this.state} />
+          <Routes emit={this.emit} {...this.state} />
         </div>
       </HashRouter>
     )

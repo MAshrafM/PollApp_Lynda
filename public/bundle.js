@@ -23542,6 +23542,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.App = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -23586,6 +23588,7 @@ var App = exports.App = function (_React$Component) {
       status: 'disconnected',
       title: ''
     };
+    _this.emit = _this.emit.bind(_this);
     return _this;
   }
 
@@ -23606,6 +23609,11 @@ var App = exports.App = function (_React$Component) {
       });
     }
   }, {
+    key: 'emit',
+    value: function emit(eventName, payload) {
+      this.socket.emit(eventName, payload);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -23615,7 +23623,7 @@ var App = exports.App = function (_React$Component) {
           'div',
           null,
           _react2.default.createElement(_Header2.default, { title: this.state.title, status: this.state.status }),
-          _react2.default.createElement(_Routes2.default, this.state)
+          _react2.default.createElement(_Routes2.default, _extends({ emit: this.emit }, this.state))
         )
       );
     }
@@ -30074,7 +30082,7 @@ var Audience = exports.Audience = function (_React$Component) {
             'Join The Session'
           ),
           _react2.default.createElement('hr', null),
-          _react2.default.createElement(_Join2.default, null)
+          _react2.default.createElement(_Join2.default, { emit: this.props.emit })
         )
       );
     }
@@ -30180,7 +30188,7 @@ var Join = function (_React$Component) {
     key: 'join',
     value: function join() {
       var memberName = this.input.value;
-      console.log(memberName);
+      this.props.emit('join', { name: memberName });
     }
   }, {
     key: 'render',
