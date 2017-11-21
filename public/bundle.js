@@ -23602,6 +23602,10 @@ var App = exports.App = function (_React$Component) {
       this.socket = (0, _socket2.default)('http://localhost:3000');
       this.socket.on('connect', function () {
         _this2.setState({ status: 'connected' });
+        var member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null;
+        if (member) {
+          _this2.emit('join', member);
+        }
       });
       this.socket.on('disconnect', function () {
         _this2.setState({ status: 'disconnected' });
@@ -23611,6 +23615,7 @@ var App = exports.App = function (_React$Component) {
       });
       this.socket.on('joined', function (member) {
         _this2.setState({ member: member });
+        sessionStorage.member = JSON.stringify(member);
       });
       this.socket.on('audience', function (audience) {
         _this2.setState({ audience: audience });

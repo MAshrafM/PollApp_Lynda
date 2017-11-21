@@ -21,6 +21,10 @@ export class App extends React.Component {
     this.socket = io('http://localhost:3000')
     this.socket.on('connect', () => {
       this.setState({ status: 'connected' })
+      let member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null
+      if(member) {
+        this.emit('join', member)
+      }
     })
     this.socket.on('disconnect', 
     () => {
@@ -31,6 +35,7 @@ export class App extends React.Component {
     })
     this.socket.on('joined', member => {
       this.setState({ member: member })
+      sessionStorage.member = JSON.stringify(member);
     })
     this.socket.on('audience', audience => {
       this.setState({ audience: audience })
