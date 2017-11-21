@@ -3,6 +3,7 @@ const app = express()
 
 // variables used accross app
 let connections = []
+let audience = []
 let title = 'Untitled'
 // use express
 app.use(express.static('./public'))
@@ -28,7 +29,9 @@ io.sockets.on('connection', socket => {
       id: this.id,
       name: payload.name
     }
+    audience.push(newMember)
     socket.emit('joined', newMember)
+    io.sockets.emit('audience', audience)
     console.log('Audience Joined: %s', payload.name)
   })
   // number of sockets connection

@@ -23587,7 +23587,8 @@ var App = exports.App = function (_React$Component) {
     _this.state = {
       status: 'disconnected',
       title: '',
-      member: {}
+      member: {},
+      audience: []
     };
     _this.emit = _this.emit.bind(_this);
     return _this;
@@ -23610,6 +23611,9 @@ var App = exports.App = function (_React$Component) {
       });
       this.socket.on('joined', function (member) {
         _this2.setState({ member: member });
+      });
+      this.socket.on('audience', function (audience) {
+        _this2.setState({ audience: audience });
       });
     }
   }, {
@@ -30088,6 +30092,12 @@ var Audience = exports.Audience = function (_React$Component) {
               null,
               'Welcome ',
               this.props.member.name
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              this.props.audience.length,
+              ' audience members connected.'
             ),
             _react2.default.createElement(
               'p',
