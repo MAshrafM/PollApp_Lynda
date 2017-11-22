@@ -29,7 +29,9 @@ io.sockets.on('connection', socket => {
   })
   // emit title
   socket.emit('welcome', {
-    title: title
+    title: title,
+    audience: audience,
+    speaker: speaker.name
   })
   // join event
   socket.on('join', payload => {
@@ -48,7 +50,12 @@ io.sockets.on('connection', socket => {
     speaker.name = payload.name
     speaker.id = socket.id
     speaker.type = 'speaker'
+    title = payload.title
     socket.emit('joined', speaker)
+    io.sockets.emit('start', {
+      title: title,
+      speaker: speaker.name
+    })
     console.log("Presentation Started.")
   })
   // number of sockets connection

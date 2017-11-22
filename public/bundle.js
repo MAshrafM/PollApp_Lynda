@@ -23639,7 +23639,7 @@ var App = exports.App = function (_React$Component) {
       title: '',
       member: {},
       audience: [],
-      speaker: {}
+      speaker: ''
     };
     _this.emit = _this.emit.bind(_this);
     return _this;
@@ -23662,7 +23662,7 @@ var App = exports.App = function (_React$Component) {
         _this2.setState({ status: 'disconnected' });
       });
       this.socket.on('welcome', function (serverState) {
-        _this2.setState({ title: serverState.title });
+        _this2.setState(serverState);
       });
       this.socket.on('joined', function (member) {
         _this2.setState({ member: member });
@@ -23670,6 +23670,9 @@ var App = exports.App = function (_React$Component) {
       });
       this.socket.on('audience', function (audience) {
         _this2.setState({ audience: audience });
+      });
+      this.socket.on('start', function (serverState) {
+        _this2.setState(serverState);
       });
     }
   }, {
@@ -23686,7 +23689,7 @@ var App = exports.App = function (_React$Component) {
         _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement(_Header2.default, { title: this.state.title, status: this.state.status }),
+          _react2.default.createElement(_Header2.default, this.state),
           _react2.default.createElement(_Routes2.default, _extends({ emit: this.emit }, this.state))
         )
       );
@@ -29050,6 +29053,11 @@ var Header = exports.Header = function (_React$Component) {
             'h1',
             null,
             this.props.title
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.speaker
           )
         ),
         _react2.default.createElement(

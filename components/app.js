@@ -13,7 +13,7 @@ export class App extends React.Component {
       title: '',
       member: {},
       audience: [],
-      speaker: {}
+      speaker: ''
     }
     this.emit = this.emit.bind(this)
   }
@@ -32,7 +32,7 @@ export class App extends React.Component {
       this.setState({ status: 'disconnected' })
     })
     this.socket.on('welcome', serverState => {
-      this.setState({ title: serverState.title })
+      this.setState(serverState)
     })
     this.socket.on('joined', member => {
       this.setState({ member: member })
@@ -40,6 +40,9 @@ export class App extends React.Component {
     })
     this.socket.on('audience', audience => {
       this.setState({ audience: audience })
+    })
+    this.socket.on('start', serverState => {
+      this.setState(serverState)
     })
   }
   
@@ -51,7 +54,7 @@ export class App extends React.Component {
     return (
       <HashRouter>
         <div>
-          <Header title={this.state.title} status={this.state.status} />
+          <Header {...this.state} />
           <Routes emit={this.emit} {...this.state} />
         </div>
       </HashRouter>
