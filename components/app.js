@@ -12,7 +12,8 @@ export class App extends React.Component {
       status: 'disconnected',
       title: '',
       member: {},
-      audience: []
+      audience: [],
+      speaker: {}
     }
     this.emit = this.emit.bind(this)
   }

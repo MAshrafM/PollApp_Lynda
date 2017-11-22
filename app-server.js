@@ -6,6 +6,7 @@ const app = express()
 let connections = []
 let audience = []
 let title = 'Untitled'
+let speaker = {}
 // use express
 app.use(express.static('./public'))
 app.use(express.static('./node_modules/bootstrap/dist'))
@@ -34,12 +35,21 @@ io.sockets.on('connection', socket => {
   socket.on('join', payload => {
     let newMember = {
       id: socket.id,
-      name: payload.name
+      name: payload.name,
+      type: 'member'
     }
     audience.push(newMember)
     socket.emit('joined', newMember)
     io.sockets.emit('audience', audience)
     console.log('Audience Joined: %s', payload.name)
+  })
+  // start event
+  socket.on('start', payload => {
+    speaker.name = payload.name
+    speaker.id = socket.id
+    speaker.type = 'speaker'
+    socket.emit('joined', speaker)
+    console.log("Presentation Started.")
   })
   // number of sockets connection
   connections.push(socket)

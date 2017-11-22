@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
 
 class Join extends React.Component {
   constructor (props){
@@ -23,6 +23,7 @@ class Join extends React.Component {
           required
         />
         <button className="btn btn-primary">Join</button>
+        <Link to='/speaker'>Join as Speaker</Link>
       </form>
     ) 
   }
