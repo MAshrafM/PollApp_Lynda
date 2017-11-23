@@ -30055,11 +30055,11 @@ var _Speaker = __webpack_require__(125);
 
 var _Speaker2 = _interopRequireDefault(_Speaker);
 
-var _Board = __webpack_require__(127);
+var _Board = __webpack_require__(128);
 
 var _Board2 = _interopRequireDefault(_Board);
 
-var _ = __webpack_require__(128);
+var _ = __webpack_require__(129);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30317,6 +30317,10 @@ var _JoinSpeaker = __webpack_require__(126);
 
 var _JoinSpeaker2 = _interopRequireDefault(_JoinSpeaker);
 
+var _Attendance = __webpack_require__(127);
+
+var _Attendance2 = _interopRequireDefault(_Attendance);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30351,11 +30355,7 @@ var Speaker = exports.Speaker = function (_React$Component) {
               null,
               'Questions'
             ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'Attendance'
-            )
+            _react2.default.createElement(_Attendance2.default, { audience: this.props.audience })
           ),
           _react2.default.createElement(
             _Display2.default,
@@ -30482,6 +30482,107 @@ exports.default = JoinSpeaker;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Attendance = function (_React$Component) {
+  _inherits(Attendance, _React$Component);
+
+  function Attendance(props) {
+    _classCallCheck(this, Attendance);
+
+    return _possibleConstructorReturn(this, (Attendance.__proto__ || Object.getPrototypeOf(Attendance)).call(this, props));
+  }
+
+  _createClass(Attendance, [{
+    key: 'addMemberRow',
+    value: function addMemberRow(member, i) {
+      return _react2.default.createElement(
+        'tr',
+        { key: i },
+        _react2.default.createElement(
+          'td',
+          null,
+          member.name
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          member.id
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h2',
+          null,
+          ' Attendance - ',
+          this.props.audience.length,
+          ' members'
+        ),
+        _react2.default.createElement(
+          'table',
+          { className: 'table table-striped' },
+          _react2.default.createElement(
+            'thead',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                null,
+                'Audience Member'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Socket ID'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            this.props.audience.map(this.addMemberRow)
+          )
+        )
+      );
+    }
+  }]);
+
+  return Attendance;
+}(_react2.default.Component);
+
+exports.default = Attendance;
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.Board = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -30525,7 +30626,7 @@ var Board = exports.Board = function (_React$Component) {
 exports.default = Board;
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

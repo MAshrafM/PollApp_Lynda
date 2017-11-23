@@ -1,7 +1,7 @@
 import React from 'react'
 import Display from './parts/Display'
 import JoinSpeaker from './parts/JoinSpeaker'
-
+import Attendance from './parts/Attendance'
 export class Speaker extends React.Component {
   constructor (props) {
     super(props)
@@ -13,7 +13,7 @@ export class Speaker extends React.Component {
         <Display if={this.props.status === 'connected'}>
           <Display if={this.props.member.name && this.props.member.type === 'speaker'}>
             <p>Questions</p>
-            <p>Attendance</p>
+            <Attendance audience={this.props.audience} />
           </Display>
           <Display if={!this.props.member.name}>
             <h2>Start The Presentaion</h2>
