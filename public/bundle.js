@@ -23654,12 +23654,21 @@ var App = exports.App = function (_React$Component) {
       this.socket.on('connect', function () {
         _this2.setState({ status: 'connected' });
         var member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null;
-        if (member) {
+        if (member && member.type === 'audience') {
           _this2.emit('join', member);
+        } else if (member && member.type === 'speaker') {
+          _this2.emit('start', {
+            name: member.name,
+            title: sessionStorage.title
+          });
         }
       });
       this.socket.on('disconnect', function () {
-        _this2.setState({ status: 'disconnected' });
+        _this2.setState({
+          status: 'disconnected',
+          title: 'Untitled',
+          speaker: ''
+        });
       });
       this.socket.on('welcome', function (serverState) {
         _this2.setState(serverState);
@@ -23672,6 +23681,13 @@ var App = exports.App = function (_React$Component) {
         _this2.setState({ audience: audience });
       });
       this.socket.on('start', function (serverState) {
+        _this2.setState(serverState);
+        if (_this2.state.member.type === 'speaker') {
+          sessionStorage.title = serverState.title;
+        }
+      });
+      this.socket.on('end', function (serverState) {
+        console.log(serverState);
         _this2.setState(serverState);
       });
     }

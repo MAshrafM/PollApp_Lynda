@@ -22,10 +22,18 @@ io.sockets.on('connection', socket => {
       audience.splice(audience.indexOf(member), 1)
       io.sockets.emit('audience', audience)
       console.log('%s Left.', member.name)
+    } else if (socket.id === speaker.id) {
+      console.log('%s has left. Presentation is over.', speaker.name)
+      speaker = {}
+      title = 'Untitled'
+      io.sockets.emit('end', {
+        title: title,
+        speaker: ''
+      })
     }
     connections.splice(connections.indexOf(socket), 1)
     socket.disconnect()
-    console.log("Disconnected: %s sockets remaining.", connections.length)
+    console.log('Disconnected: %s sockets remaining.', connections.length)
   })
   // emit title
   socket.emit('welcome', {

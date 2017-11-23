@@ -23,13 +23,22 @@ export class App extends React.Component {
     this.socket.on('connect', () => {
       this.setState({ status: 'connected' })
       let member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null
-      if(member) {
+      if(member && member.type === 'audience') {
         this.emit('join', member)
+      } else if (member && member.type === 'speaker') {
+        this.emit('start', {
+          name: member.name,
+          title: sessionStorage.title
+        })
       }
     })
     this.socket.on('disconnect', 
     () => {
-      this.setState({ status: 'disconnected' })
+      this.setState({ 
+        status: 'disconnected',
+        title: 'Untitled',
+        speaker: ''
+      })
     })
     this.socket.on('welcome', serverState => {
       this.setState(serverState)
@@ -42,6 +51,13 @@ export class App extends React.Component {
       this.setState({ audience: audience })
     })
     this.socket.on('start', serverState => {
+      this.setState(serverState)
+      if(this.state.member.type === 'speaker'){
+        sessionStorage.title = serverState.title
+      }
+    })
+    this.socket.on('end', serverState => {
+      console.log(serverState)
       this.setState(serverState)
     })
   }
