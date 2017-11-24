@@ -1,7 +1,38 @@
 const express = require('express')
 const _ = require('underscore')
 const app = express()
-
+// data
+// problem with export in webpack need to be fixed.
+const questions = [
+  {
+    "q": "What is you favorite Language?",
+    "a": "Javascript",
+    "b": "Ruby",
+    "c": "C/C++",
+    "d": "Python"
+  },
+  {
+    "q": "What is your favorite framework?",
+    "a": "Angular",
+    "b": "React",
+    "c": "Rails",
+    "d": "Other"
+  },
+  {
+    "q": "What is your profession ?",
+    "a": "Engineer",
+    "b": "Teacher",
+    "c": "Student",
+    "d": "Other"
+  },
+  {
+    "q": "Where are you from ?",
+    "a": "USA",
+    "b": "India",
+    "c": "Egypt",
+    "d": "Other"
+  }
+]
 // variables used accross app
 let connections = []
 let audience = []
@@ -39,7 +70,8 @@ io.sockets.on('connection', socket => {
   socket.emit('welcome', {
     title: title,
     audience: audience,
-    speaker: speaker.name
+    speaker: speaker.name,
+    questions: questions
   })
   // join event
   socket.on('join', payload => {

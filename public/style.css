@@ -46,15 +46,18 @@ form a {
 
 
 #questions>div>span {
-    padding: .5em;
+    padding: 1em;
     margin: .5em;
     display: block;
     cursor: pointer;
-    border: 2px solid green;
+    border: 2px solid #333;
+    border-radius: .5em;
+    font-weight: 800;
+    transition: all 1s ease-in-out;
 }
 
 #questions>div>span:hover {
-    background-color: yellow;
+    background-color: #e1e1e1;
 }
 
 #currentQuestion button {

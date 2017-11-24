@@ -13,7 +13,8 @@ export class App extends React.Component {
       title: '',
       member: {},
       audience: [],
-      speaker: ''
+      speaker: '',
+      questions: []
     }
     this.emit = this.emit.bind(this)
   }
