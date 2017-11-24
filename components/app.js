@@ -14,7 +14,8 @@ export class App extends React.Component {
       member: {},
       audience: [],
       speaker: '',
-      questions: []
+      questions: [],
+      currentQuestion: false
     }
     this.emit = this.emit.bind(this)
   }
@@ -60,6 +61,9 @@ export class App extends React.Component {
     this.socket.on('end', serverState => {
       console.log(serverState)
       this.setState(serverState)
+    })
+    this.socket.on('asked', question => {
+      this.setState({ currentQuestion: question })
     })
   }
   

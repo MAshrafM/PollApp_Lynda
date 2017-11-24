@@ -14,7 +14,7 @@ export class Speaker extends React.Component {
       <div>
         <Display if={this.props.status === 'connected'}>
           <Display if={this.props.member.name && this.props.member.type === 'speaker'}>
-            <Questions questions={this.props.questions}/>
+            <Questions questions={this.props.questions} emit={this.props.emit}/>
             <Attendance audience={this.props.audience} />
           </Display>
           <Display if={!this.props.member.name}>

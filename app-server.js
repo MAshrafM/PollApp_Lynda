@@ -38,6 +38,7 @@ let connections = []
 let audience = []
 let title = 'Untitled'
 let speaker = {}
+let currentQuestion = false
 // use express
 app.use(express.static('./public'))
 app.use(express.static('./node_modules/bootstrap/dist'))
@@ -71,7 +72,8 @@ io.sockets.on('connection', socket => {
     title: title,
     audience: audience,
     speaker: speaker.name,
-    questions: questions
+    questions: questions,
+    currentQuestion: currentQuestion
   })
   // join event
   socket.on('join', payload => {
@@ -96,7 +98,13 @@ io.sockets.on('connection', socket => {
       title: title,
       speaker: speaker.name
     })
-    console.log("Presentation Started.")
+    console.log('Presentation Started.')
+  })
+  // ask event
+  socket.on('ask', question => {
+    currentQuestion = question
+    io.sockets.emit('asked', currentQuestion)
+    console.log('Question Asked: %s', question.q)
   })
   // number of sockets connection
   connections.push(socket)

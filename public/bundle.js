@@ -23640,7 +23640,8 @@ var App = exports.App = function (_React$Component) {
       member: {},
       audience: [],
       speaker: '',
-      questions: []
+      questions: [],
+      currentQuestion: false
     };
     _this.emit = _this.emit.bind(_this);
     return _this;
@@ -23690,6 +23691,9 @@ var App = exports.App = function (_React$Component) {
       this.socket.on('end', function (serverState) {
         console.log(serverState);
         _this2.setState(serverState);
+      });
+      this.socket.on('asked', function (question) {
+        _this2.setState({ currentQuestion: question });
       });
     }
   }, {
@@ -30169,21 +30173,34 @@ var Audience = exports.Audience = function (_React$Component) {
             _Display2.default,
             { 'if': this.props.member.name },
             _react2.default.createElement(
-              'h2',
-              null,
-              'Welcome ',
-              this.props.member.name
+              _Display2.default,
+              { 'if': !this.props.currentQuestion },
+              _react2.default.createElement(
+                'h2',
+                null,
+                'Welcome ',
+                this.props.member.name
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                this.props.audience.length,
+                ' audience members connected.'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Questions will appear here.'
+              )
             ),
             _react2.default.createElement(
-              'p',
-              null,
-              this.props.audience.length,
-              ' audience members connected.'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'Questions will appear here.'
+              _Display2.default,
+              { 'if': this.props.currentQuestion },
+              _react2.default.createElement(
+                'h2',
+                null,
+                this.props.currentQuestion.q
+              )
             )
           ),
           _react2.default.createElement(
@@ -30355,7 +30372,7 @@ var Speaker = exports.Speaker = function (_React$Component) {
           _react2.default.createElement(
             _Display2.default,
             { 'if': this.props.member.name && this.props.member.type === 'speaker' },
-            _react2.default.createElement(_Questions2.default, { questions: this.props.questions }),
+            _react2.default.createElement(_Questions2.default, { questions: this.props.questions, emit: this.props.emit }),
             _react2.default.createElement(_Attendance2.default, { audience: this.props.audience })
           ),
           _react2.default.createElement(
@@ -30609,30 +30626,34 @@ var Questions = function (_React$Component) {
   }
 
   _createClass(Questions, [{
-    key: "addQuestion",
-    value: function addQuestion(question, i) {
-      return _react2.default.createElement(
-        "div",
-        { key: i, className: "col-xs-12 col-sm-6 col-md-3" },
-        _react2.default.createElement(
-          "span",
-          null,
-          question.q
-        )
-      );
+    key: 'ask',
+    value: function ask(question) {
+      this.props.emit('ask', question);
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
-        "div",
-        { id: "questions", className: "row" },
+        'div',
+        { id: 'questions', className: 'row' },
         _react2.default.createElement(
-          "h2",
+          'h2',
           null,
-          "Questions"
+          'Questions'
         ),
-        this.props.questions.map(this.addQuestion)
+        this.props.questions.map(function (question, i) {
+          return _react2.default.createElement(
+            'div',
+            { key: i, className: 'col-xs-12 col-sm-6 col-md-3' },
+            _react2.default.createElement(
+              'span',
+              { onClick: _this2.ask.bind(_this2, question) },
+              question.q
+            )
+          );
+        })
       );
     }
   }]);
