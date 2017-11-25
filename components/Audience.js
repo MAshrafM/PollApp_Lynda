@@ -1,6 +1,7 @@
 import React from 'react'
 import Display from './parts/Display'
 import Join from './parts/Join'
+import Ask from './parts/Ask'
 
 export class Audience extends React.Component {
   constructor (props) {
@@ -18,7 +19,7 @@ export class Audience extends React.Component {
               <p>Questions will appear here.</p>
             </Display>
             <Display if={this.props.currentQuestion}>
-              <h2>{this.props.currentQuestion.q}</h2>
+              <Ask question={this.props.currentQuestion} />
             </Display>
           </Display>
           <Display if={!this.props.member.name}>

@@ -30056,15 +30056,15 @@ var _Audience = __webpack_require__(123);
 
 var _Audience2 = _interopRequireDefault(_Audience);
 
-var _Speaker = __webpack_require__(125);
+var _Speaker = __webpack_require__(126);
 
 var _Speaker2 = _interopRequireDefault(_Speaker);
 
-var _Board = __webpack_require__(129);
+var _Board = __webpack_require__(130);
 
 var _Board2 = _interopRequireDefault(_Board);
 
-var _ = __webpack_require__(130);
+var _ = __webpack_require__(131);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30143,6 +30143,10 @@ var _Join = __webpack_require__(124);
 
 var _Join2 = _interopRequireDefault(_Join);
 
+var _Ask = __webpack_require__(125);
+
+var _Ask2 = _interopRequireDefault(_Ask);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30196,11 +30200,7 @@ var Audience = exports.Audience = function (_React$Component) {
             _react2.default.createElement(
               _Display2.default,
               { 'if': this.props.currentQuestion },
-              _react2.default.createElement(
-                'h2',
-                null,
-                this.props.currentQuestion.q
-              )
+              _react2.default.createElement(_Ask2.default, { question: this.props.currentQuestion })
             )
           ),
           _react2.default.createElement(
@@ -30319,6 +30319,105 @@ exports.default = Join;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Ask = function (_React$Component) {
+  _inherits(Ask, _React$Component);
+
+  function Ask(props) {
+    _classCallCheck(this, Ask);
+
+    var _this = _possibleConstructorReturn(this, (Ask.__proto__ || Object.getPrototypeOf(Ask)).call(this, props));
+
+    _this.state = {
+      choices: []
+    };
+    _this.setUpChoices = _this.setUpChoices.bind(_this);
+    return _this;
+  }
+
+  _createClass(Ask, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.setUpChoices();
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps() {
+      this.setUpChoices();
+    }
+  }, {
+    key: "setUpChoices",
+    value: function setUpChoices() {
+      var choices = Object.keys(this.props.question);
+      choices.shift();
+      console.log("1st" + choices);
+      console.log("2nd" + this.choices);
+      this.setState({ choices: choices });
+      console.log("3rd" + this.choices);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        "div",
+        { id: "currentQuestion" },
+        _react2.default.createElement(
+          "h2",
+          null,
+          this.props.question.q
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "row" },
+          this.state.choices.map(function (choice, i) {
+            var buttonTypes = ['primary', 'success', 'warning', 'danger'];
+            return _react2.default.createElement(
+              "button",
+              {
+                key: i,
+                className: "col-xs-12 col-sm-6 btn btn-" + buttonTypes[i]
+              },
+              choice,
+              " : ",
+              _this2.props.question[choice]
+            );
+          })
+        )
+      );
+    }
+  }]);
+
+  return Ask;
+}(_react2.default.Component);
+
+exports.default = Ask;
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.Speaker = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -30331,15 +30430,15 @@ var _Display = __webpack_require__(61);
 
 var _Display2 = _interopRequireDefault(_Display);
 
-var _JoinSpeaker = __webpack_require__(126);
+var _JoinSpeaker = __webpack_require__(127);
 
 var _JoinSpeaker2 = _interopRequireDefault(_JoinSpeaker);
 
-var _Attendance = __webpack_require__(127);
+var _Attendance = __webpack_require__(128);
 
 var _Attendance2 = _interopRequireDefault(_Attendance);
 
-var _Questions = __webpack_require__(128);
+var _Questions = __webpack_require__(129);
 
 var _Questions2 = _interopRequireDefault(_Questions);
 
@@ -30396,7 +30495,7 @@ var Speaker = exports.Speaker = function (_React$Component) {
 exports.default = Speaker;
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30491,7 +30590,7 @@ var JoinSpeaker = function (_React$Component) {
 exports.default = JoinSpeaker;
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30592,7 +30691,7 @@ var Attendance = function (_React$Component) {
 exports.default = Attendance;
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30664,7 +30763,7 @@ var Questions = function (_React$Component) {
 exports.default = Questions;
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30716,7 +30815,7 @@ var Board = exports.Board = function (_React$Component) {
 exports.default = Board;
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
