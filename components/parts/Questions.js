@@ -6,6 +6,7 @@ class Questions extends React.Component {
   }
   
   ask(question) {
+    sessionStorage.answer = ''
     this.props.emit('ask', question)
   }
   

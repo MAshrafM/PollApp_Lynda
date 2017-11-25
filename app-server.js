@@ -39,6 +39,12 @@ let audience = []
 let title = 'Untitled'
 let speaker = {}
 let currentQuestion = false
+let results = {
+  a: 0,
+  b: 0,
+  c: 0,
+  d: 0
+}
 // use express
 app.use(express.static('./public'))
 app.use(express.static('./node_modules/bootstrap/dist'))
@@ -103,8 +109,14 @@ io.sockets.on('connection', socket => {
   // ask event
   socket.on('ask', question => {
     currentQuestion = question
+    results = {a:0, b:0, c:0, d:0}
     io.sockets.emit('asked', currentQuestion)
     console.log('Question Asked: %s', question.q)
+  })
+  // answer event
+  socket.on('answer', payload => {
+    results[payload.choice]++
+    console.log("Answer: %s", payload.choice)
   })
   // number of sockets connection
   connections.push(socket)

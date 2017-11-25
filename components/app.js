@@ -64,6 +64,7 @@ export class App extends React.Component {
     })
     this.socket.on('asked', question => {
       this.setState({ currentQuestion: question })
+      sessionStorage.answer = ''
     })
   }
   
