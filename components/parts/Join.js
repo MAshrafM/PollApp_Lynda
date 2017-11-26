@@ -24,6 +24,7 @@ class Join extends React.Component {
         />
         <button className="btn btn-primary">Join</button>
         <Link to='/speaker'>Join as Speaker</Link>
+        <Link to='/board'>Go to The Board.</Link>
       </form>
     ) 
   }

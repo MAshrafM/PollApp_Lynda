@@ -79,7 +79,8 @@ io.sockets.on('connection', socket => {
     audience: audience,
     speaker: speaker.name,
     questions: questions,
-    currentQuestion: currentQuestion
+    currentQuestion: currentQuestion,
+    results: results
   })
   // join event
   socket.on('join', payload => {
@@ -116,6 +117,7 @@ io.sockets.on('connection', socket => {
   // answer event
   socket.on('answer', payload => {
     results[payload.choice]++
+    io.sockets.emit('results', results)
     console.log("Answer: %s", payload.choice)
   })
   // number of sockets connection
