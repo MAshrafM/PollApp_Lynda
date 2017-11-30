@@ -41613,9 +41613,7 @@ var Board = exports.Board = function (_React$Component) {
   _createClass(Board, [{
     key: 'barGraphData',
     value: function barGraphData(results) {
-      console.log(results);
       return Object.keys(results).map(function (choice) {
-        console.log("in map" + choice);
         return {
           label: choice,
           value: results[choice]

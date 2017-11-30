@@ -48,7 +48,7 @@ class Ask extends React.Component {
             return (
               <button 
                 key={i}
-                className={"col-xs-12 col-sm-6 btn btn-" + buttonTypes[i]}
+                className={"col-xs-12 col-sm-6 col-md-3 col-md-offset-3 cbtn btn-" + buttonTypes[i]}
                 onClick={this.selectAnswer.bind(this, choice)}
               >
                 {choice} : {this.props.question[choice]}

@@ -1,7 +1,29 @@
 html,
 body {
+    min-height: 100vh;
     padding: 0;
     margin: 0;
+    background: #000046;
+    background: -webkit-linear-gradient(bottom right, #1CB5E0, #1c1c54);
+}
+
+main{
+  margin-top: 15vh;
+}
+h1,h2,h3,label,th {
+  color: #fefefe!important;
+  font-weight: 600!important;
+}
+
+p{
+  color: #fefefe!important;
+  font-weight: 400!important;
+}
+a{
+  font-weight: 800!important;
+}
+a:hover{
+  text-decoration: none!important;
 }
 
 #connection-status {
@@ -12,6 +34,7 @@ body {
     padding: 0;
     margin: 20px;
     display: block;
+    border: 1px solid #fefefe;
 }
 
 #connection-status.connected {
@@ -44,7 +67,9 @@ form a {
     padding-left: 20px;
 }
 
-
+#questions{
+  padding-left: 15px;
+}
 #questions>div>span {
     padding: 1em;
     margin: .5em;
@@ -54,6 +79,7 @@ form a {
     border-radius: .5em;
     font-weight: 800;
     transition: all 1s ease-in-out;
+    background-color: #fefefe;
 }
 
 #questions>div>span:hover {
