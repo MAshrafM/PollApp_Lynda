@@ -21,4 +21,4 @@ Polling App allow three types of Views:
 - Presentation format and Panels
 
 ## Show:
-![View]()
+![View](https://github.com/MAshrafM/PollApp_Lynda/blob/master/show.png)
